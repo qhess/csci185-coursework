@@ -3,15 +3,30 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0px;
     font-family: Arial, sans-serif;
 }
 header, section {
     padding: 20px;
+    
+}
+header {
+    background-color: #ab3604;
 }
 p, li {
     line-height: 1.5em;
+}
+
+#tutorials {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+#homework {
+    display: grid;
+    grid-template-columns: auto;
 }
 
 #inspiration {
@@ -19,3 +34,4 @@ p, li {
     padding-top: 40px;
     padding-bottom: 40px;
 }
+
