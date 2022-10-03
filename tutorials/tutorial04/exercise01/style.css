@@ -1,0 +1,30 @@
+body {
+    background-color:#f0f4ef;
+    margin:0;
+}
+header {
+    background-color: #b4cded;
+    text-align: center;
+    text-align:;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: large;
+    padding: 1px;
+}
+nav {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+main {
+
+}
+#images {
+    display:flex;
+    justify-content: space-evenly;
+}
+footer {
+    background-color: #344966;
+    color: white;
+    text-align: center;
+}
