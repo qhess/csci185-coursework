@@ -42,7 +42,7 @@ function setup() {
     ///////////
     // https://p5js.org/reference/#/p5/ellipse
     fill('teal');
-    ellipse(100, 200, 60, 100);
+    ellipse(100, 200, 60, 130);
     fill('teal');
     strokeWeight(10);
     stroke('red');
