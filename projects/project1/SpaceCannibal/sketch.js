@@ -1,4 +1,6 @@
+let screennum = 1;
 
+let button;
 
 const canvasWidth = window.innerWidth;
 const canvasHeight = window.innerHeight; 
@@ -9,13 +11,30 @@ const circleData = [
     {x: 400, y: 400, d: 25, alive: true},
     {x: 40, y: 520, d: 80, alive: true},
     {x: 140, y: 120, d: 50, alive: true},
-    {x: 350, y: 350, d: 70, alive: true}
+    {x: 350, y: 350, d: 70, alive: true},
+    {x: -10, y: 200, d: 37, alive: true},
+    {x: -60, y: 325, d: 87, alive: true},
+    {x: -110, y: 564, d: 72, alive: true},
+    {x: -160, y: 323, d: 91, alive: true},
+    {x: -210, y: 158, d: 26, alive: true},
+    {x: -260, y: 303, d: 61, alive: true},
+    {x: -310, y: 121, d: 24, alive: true},
+    {x: -360, y: 78, d: 69, alive: true},
+    {x: -410, y: 254, d: 42, alive: true},
+    {x: -460, y: 329, d: 28, alive: true},
+    {x: -510, y: 377, d: 52, alive: true},
+    {x: -560, y: 506, d: 80, alive: true},
+    {x: -610, y: 430, d: 22, alive: true},
+    {x: -660, y: 180, d: 57, alive: true}
 ];
 
 let width = 50;
 let fillColor = 'white';
 let x = canvasWidth -100;
 let y = canvasHeight / 2 - 50;
+
+
+
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
@@ -36,10 +55,45 @@ function setup() {
 
 function draw() {
     
-    
     clear();
+    if (screennum == 1) {
+    scene1 ();
+    } else if (screennum == 2) {
+    scene2 ();
+    } else if (screennum == 3) {
+    scene3 ();
+    }
+}
+
+function scene1() {
+    clear ();
+    strokeWeight (0);
+    fill('red');
+    textAlign(CENTER);
+    textSize(16);
+    text("This is Glagnar. He is HUNGRY!!", canvasWidth/2, canvasHeight/2+100);
+    text("He also needs to spread his genes throughout space!", canvasWidth/2, canvasHeight/2+120);
+    text("Help him eat his fellow weirdos and grow stronger.", canvasWidth/2, canvasHeight/2+140);
     
+    button = createButton('click me');
+    button.position(50, 35);
+    button.mousePressed(nextLevel);
+
+    drawCreature(canvasWidth/2, canvasHeight/2-100, 200, '#8E9F5B', '#F0DF21');
+}
+
+function nextLevel() {
+    if (screennum == 1) {
+    screennum = 2;    
+    } else if (screennum == 2) {
+    screennum = 3;
+    }
+}
+
+function scene2 () {
+    clear ();
     let i = 0;
+    let scoreCount = 0;
     while (i < 300)  {
 
         strokeWeight(0);
@@ -74,7 +128,8 @@ function draw() {
         let intersected = checkIntersection (p, x, y, width) && p.alive;
         if (intersected) {
             p.alive = false
-            width += p.d / 2
+            width += p.d / 4
+            scoreCount++;
         }
          if (p.alive) {
         drawCreature (p.x, p.y, p.d, 'grey', 'violet');
@@ -82,9 +137,24 @@ function draw() {
          }
     }
     
+    
+
     strokeWeight (0);
     displayMessage();
+    
+    textSize(32);
+    fill('white');
+    text(scoreCount, canvasWidth - 100, 50);
 }
+
+function scene3 () {
+   
+    drawCreature(canvasWidth/2, canvasHeight/2, canvasHeight/3, '#8E9F5B', '#F0DF21');
+
+    
+}
+
+
 
 function moveController(ev) {
     console.log(ev.code);
@@ -114,7 +184,7 @@ function displayMessage() {
     fill('red');
      textAlign(CENTER);
      textSize(16);
-     text("Use the arrow keys to move, eat all of your friends!", canvasWidth/2, canvasHeight/2);
+     text("Use the arrow keys to move, eat all of your friends!", canvasWidth/2, 50);
 }
 
 
