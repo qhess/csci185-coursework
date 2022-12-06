@@ -1,5 +1,6 @@
-let screennum = 3;
+let screennum = 1;
 let scoreCount = 0;
+let scoreCount2 = 0;
 let button;
 
 let arrows = [
@@ -39,6 +40,15 @@ const circleData = [
     { x: -660, y: 180, d: 57, alive: true }
 ];
 
+const offspringData = [
+    { x: canvasWidth / 2, y: canvasHeight / 2 - 50, d: diameter/2},
+    { x: canvasWidth / 2 - 50, y: canvasHeight / 2 - 15, d: diameter/2},
+    { x: canvasWidth / 2 + 50, y: canvasHeight / 2 - 15, d: diameter/2},
+    { x: canvasWidth / 2 - 50, y: canvasHeight / 2 + 30, d: diameter/2},
+    { x: canvasWidth / 2 + 50, y: canvasHeight / 2 + 30, d: diameter/2},
+    { x: canvasWidth / 2, y: canvasHeight / 2 + 70, d: diameter/2}
+];
+
 let width = 50;
 let fillColor = 'white';
 let x = canvasWidth - 100;
@@ -75,11 +85,14 @@ function draw() {
         scene2();
     } else if (screennum == 3) {
         scene3();
+    } else if (screennum == 4) {
+        scene4();
     }
 }
 
 function scene1() {
     clear();
+    background(bg);
     strokeWeight(0);
     fill('red');
     textAlign(CENTER);
@@ -92,7 +105,7 @@ function scene1() {
     button.position(50, 35);
     button.mousePressed(nextLevel);
 
-    drawCreature(canvasWidth / 2, canvasHeight / 2 - 100, 200, '#8E9F5B', '#F0DF21');
+    drawCreature(canvasWidth / 2, canvasHeight / 2 - 100, 50, '#8E9F5B', '#F0DF21');
 }
 
 function nextLevel() {
@@ -101,6 +114,8 @@ function nextLevel() {
     } else if (screennum == 2) {
         screennum = 3;
         width = canvasHeight / 3;
+    } else if (screennum == 3) {
+        screennum = 4;
     }
 }
 
@@ -147,7 +162,7 @@ function scene2() {
         }
         if (p.alive) {
             drawCreature(p.x, p.y, p.d, 'grey', 'violet');
-            p.x += 1;
+            p.x += .8;
         }
     }
 
@@ -157,8 +172,12 @@ function scene2() {
     displayMessage();
 
     textSize(32);
-    fill('white');
+    fill('red');
     text(scoreCount, canvasWidth - 100, 50);
+
+    if (scoreCount == 20) {
+        nextLevel();
+    }
 }
 
 function scene3() {
@@ -170,20 +189,38 @@ function scene3() {
     drawCreature(canvasWidth / 2, canvasHeight / 2, diameter, '#8E9F5B', '#F0DF21');
     //<a href="https://www.freepik.com/free-vector/dark-cave-landscape_2722247.htm#query=cartoon%20cave&position=27&from_view=keyword">Image by brgfx</a> on Freepik
     textSize(32);
-    fill('white');
-    text(scoreCount, canvasWidth - 100, 50);
+    fill('red');
+    text(scoreCount2, canvasWidth - 100, 50);
 
-    noFill();
-    strokeWeight(3);
-    stroke('red');
-    rect(canvasWidth / 2 + 200, canvasHeight / 2 - 50, 80, 80);
+    
     textSize(75);
-    text(arrow, canvasWidth / 2 + 200, canvasHeight / 2 - 50)
+    text(arrow, canvasWidth / 1.25, canvasHeight / 2)
 
+    if (scoreCount2 == 30) {
+        nextLevel();
+    }
+    textSize(20);
+    text("Press the matching arrow keys to guide Glagnar's young into the world!", canvasWidth/2, 40);
     ++counter;
 }
 
+function scene4() {
+    background(bg);
+    for (let i = 0; i < offspringData.length; i++) {
 
+        let p = offspringData[i];
+            drawCreature(p.x, p.y, p.d, '#8E9F5B', '#F0DF21');
+            p.x += 5;
+            
+        
+    }
+    fill ('yellow');
+    textSize (60);
+    text("Victory!",canvasWidth/2, canvasHeight/2);
+    textSize (20);
+    text("You have successfully fed Glagnar", canvasWidth/2, canvasHeight/2+50);
+    text("and helped him birth his offspring!", canvasWidth/2, canvasHeight/2+80);
+}
 
 function moveController(ev) {
     console.log(ev.code);
@@ -216,42 +253,42 @@ function moveControllerScene2(ev) {
 function moveControllerScene3(ev) {
     if (ev.code == 'ArrowUp') {
         if (arrow == '⬆️') {
-            scoreCount++;
-            diameter += 30;
+            scoreCount2++;
+            diameter += 15;
             
         } else {
-            scoreCount--;
-            diameter -= 30;
+            scoreCount2--;
+            diameter -= 15;
         }
         setArrow();
     } else if (ev.code == 'ArrowDown') {
         if (arrow == '⬇️') {
-            scoreCount++;
-            diameter += 30;
+            scoreCount2++;
+            diameter += 15;
             
         } else {
-            scoreCount--;
-            diameter -= 30;
+            scoreCount2--;
+            diameter -= 15;
         }
         setArrow();
     } else if (ev.code == 'ArrowLeft') {
         if (arrow == '⬅️') {
-            scoreCount++;
-            diameter += 30;
+            scoreCount2++;
+            diameter += 15;
             
         } else {
-            scoreCount--;
-            diameter -= 30;
+            scoreCount2--;
+            diameter -= 15;
         }
         setArrow();
     } else if (ev.code == 'ArrowRight') {
         if (arrow == '➡️') {
-            scoreCount++;
-            diameter += 30;
+            scoreCount2++;
+            diameter += 15;
            
         } else {
-            scoreCount--;
-            diameter -= 30;
+            scoreCount2--;
+            diameter -= 15;
         }
         setArrow();
     }
