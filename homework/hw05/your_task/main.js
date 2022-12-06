@@ -38,8 +38,8 @@ async function getTracks(term) {
         </div>
     </section>
     `
-    document.querySelector('#tracks').insertAdjacentHTML('beforeend', template);
-    counter++;
+        document.querySelector('#tracks').insertAdjacentHTML('beforeend', template);
+        counter++;
 
     }
 }
@@ -50,6 +50,14 @@ async function getAlbums(term) {
         get albums from spotify based on the search term
         "${term}" and load them into the #albums section 
         of the DOM...`);
+    let albumsEndpoint = baseURL + "?";
+    albumsEndpoint += "q=" + term + "&type=album";
+    console.log(albumsEndpoint);
+
+    document.querySelector('#albums').innerHTML = "";
+
+    const albumData = await fetch(albumsEndpoint).then(response => response.json());
+    console.log (albumData);
 }
 
 
