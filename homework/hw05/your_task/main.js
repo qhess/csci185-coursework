@@ -57,7 +57,25 @@ async function getAlbums(term) {
     document.querySelector('#albums').innerHTML = "";
 
     const albumData = await fetch(albumsEndpoint).then(response => response.json());
-    console.log (albumData);
+    
+    let counter = 0;
+    while (counter < 20) {
+    const template = `<section class="album-card" id="${albumData[counter].id}">
+    <div>
+        <img src="${albumData[counter].image_url}">
+        <h2>${albumData[counter].name}</h2>
+        <div class="footer">
+            <a href="${albumData[counter].spotify_url}" target="_blank">
+                view on spotify
+            </a>
+        </div>
+    </div>
+</section>`
+
+console.log (albumData);
+    document.querySelector('#albums').insertAdjacentHTML('beforeend', template);
+    counter++;
+    }
 }
 
 
